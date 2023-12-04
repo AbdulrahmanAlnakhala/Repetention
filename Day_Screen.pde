@@ -13,6 +13,8 @@ void drawDayScreen(int month, int day) {
   text("Finished!", 740, 92);
   checkmark = loadImage("green check.png");
   xMark = loadImage("x mark.png");
+  emptyBucket = loadImage("empty bucket icon.png");
+  fullBucket = loadImage("full bucket icon.png");
   image(checkmark, 843, 65, 40, 40);
   
   button1.setVisible(true);
@@ -32,10 +34,15 @@ void drawDayScreen(int month, int day) {
     image(xMark, 600, 145+35*i, 20, 20);
     textSize(13);
     text("Delete Event", 627, 160+35*i);
+    if (Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN == false)
+      image(emptyBucket, 727, 145+35*i, 25, 25);
+    else
+      image(fullBucket, 727, 145+35*i, 25, 25);
     fill(255);
   }
   
   if (mousePressed == true) {
+    
     //If clicked the "finished!" button
     if(mouseX >= 840 && mouseX <= 885) {
       if (mouseY >= 65 && mouseY <= 105) {
@@ -46,12 +53,25 @@ void drawDayScreen(int month, int day) {
       }
     }
     
-    //if clicked "delete" an event
+    //If clicked "delete" an event
     for (int i=0; i<Days[year-startingYear][month-1][dayBeingShown - 1].events.size(); i++) { //check for each event
       if (mouseX >= 594 && mouseX <= 700) {
         if (mouseY >=140+35*i && mouseY <= 164+35*i) {
           Days[year-startingYear][month-1][dayBeingShown - 1].events.remove(i);
-          print("deleted");
+        }
+      }
+    }
+    
+    //If turn an event into type bucket list
+    for (int i=0; i<Days[year-startingYear][month-1][dayBeingShown - 1].events.size(); i++) { //check for each event
+      if (mouseX >= 720 && mouseX <= 759) {
+        if (mouseY >=138+35*i && mouseY <= 169+35*i) {
+          Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN = !Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN;
+          if (Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN == false)
+            image(emptyBucket, 727, 145+35*i, 25, 25);
+          else
+            image(fullBucket, 727, 145+35*i, 25, 25);
+          print(Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN);
         }
       }
     }

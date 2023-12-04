@@ -1,6 +1,6 @@
 import g4p_controls.*;
 
-PImage rightArrow, leftArrow, checkmark, xMark;
+PImage rightArrow, leftArrow, checkmark, xMark, emptyBucket, fullBucket;
 int imageSize = 50;
 int textHeight = 100;
 
