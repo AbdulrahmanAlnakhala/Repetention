@@ -9,12 +9,11 @@ void drawDayScreen(int month, int day) {
   rect(0+padding, 120, width-padding, height-padding);
   rect(0+padding, 470, width-padding, height-padding);
   
-  textSize(20);
-  text("Save Changes?", 760, 91);
+  textSize(23);
+  text("Finished!", 740, 92);
   checkmark = loadImage("green check.png");
   xMark = loadImage("x mark.png");
-  image(checkmark, 900, 65, 40, 40);
-  image(xMark, 950, 64, 42, 42);
+  image(checkmark, 843, 65, 40, 40);
   
   button1.setVisible(true);
   custom_slider1.setVisible(true);
@@ -30,11 +29,15 @@ void drawDayScreen(int month, int day) {
     fill(0);
     textSize(20);
     text(Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).name, 96, 160+35*i); //9 event maximum
+    image(xMark, 600, 145+35*i, 20, 20);
+    textSize(13);
+    text("Delete Event", 627, 160+35*i);
     fill(255);
   }
   
   if (mousePressed == true) {
-    if(mouseX >= 900 && mouseX <= 940) {
+    //If clicked the "finished!" button
+    if(mouseX >= 840 && mouseX <= 885) {
       if (mouseY >= 65 && mouseY <= 105) {
         DrawDayScreen = false;
         textfield1.setVisible(false);
@@ -42,13 +45,17 @@ void drawDayScreen(int month, int day) {
         DrawOnce = true;
       }
     }
-    if(mouseX>=950 && mouseX<=992) {
-      if(mouseY>=64 && mouseY<=108) {
-        DrawDayScreen = false;
-        DrawOnce = true;
+    
+    //if clicked "delete" an event
+    for (int i=0; i<Days[year-startingYear][month-1][dayBeingShown - 1].events.size(); i++) { //check for each event
+      if (mouseX >= 594 && mouseX <= 700) {
+        if (mouseY >=140+35*i && mouseY <= 164+35*i) {
+          Days[year-startingYear][month-1][dayBeingShown - 1].events.remove(i);
+          print("deleted");
+        }
       }
     }
   }
   
-  rect(93,480, 570,520);
+  rect(93,480, 570,520); //border around text field
 }
