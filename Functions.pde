@@ -157,3 +157,13 @@ boolean isValueInArray(int value, int[] array) {
     }
     return false;
 }
+
+
+
+
+void removeEvent(String eventName, Day day){
+  for(int i = 0; i < day.events.size(); i++){
+    if(day.events.get(i).name == eventName)
+      day.events.remove(i);
+  }
+}
