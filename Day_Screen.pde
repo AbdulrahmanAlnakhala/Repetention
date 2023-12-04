@@ -57,7 +57,7 @@ void drawDayScreen(int month, int day) {
     }
     
     //if clicked "delete" an event
-    for (int i=0; i<Days[year-startingYear][month-1][dayBeingShown - 1].events.size(); i++) { //check for each event
+    for (int i=0; i<currentDay.events.size(); i++) { //check for each event
       if (mouseX >= 594 && mouseX <= 700) {
         if (mouseY >=140+35*i && mouseY <= 164+35*i) {
           Days[year-startingYear][month-1][dayBeingShown - 1].events.remove(i);
