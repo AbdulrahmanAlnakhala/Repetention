@@ -38,13 +38,14 @@ public void button1_click1(GButton source, GEvent event) { //CODE:button1:825285
       else if ((dayBeingShown - 1) + (n+1)> lengthOfMonth(year, CurrentMonth) && NewMonth == false){ 
         NewMonth = true;
         StartOfNewMonth = ((dayBeingShown - 1) + (n+1)) - lengthOfMonth(year, CurrentMonth) - 1;
-        AddedIncriments = n - StartOfNewMonth;
         CurrentMonth = CurrentMonth + 1;
-        Days[year-startingYear][CurrentMonth - 1][StartOfNewMonth + AddedIncriments - 1].events.add(newEvent);
+        Days[year-startingYear][CurrentMonth - 1][StartOfNewMonth].events.add(newEvent);
+        AddedIncriments = n - StartOfNewMonth;
       }
       else if (NewMonth == true){
-        AddedIncriments = n - StartOfNewMonth;
-        Days[year-startingYear][CurrentMonth - 1][StartOfNewMonth + AddedIncriments - 1].events.add(newEvent);
+        AddedIncriments = n - StartOfNewMonth - (lengthOfMonth(year, month)- newEvent.firstDay);
+        Days[year-startingYear][CurrentMonth - 1][StartOfNewMonth + AddedIncriments - 1].events.add(newEvent); // The first one is correct the rest are not, the second difficulty is so finicky
+        
       }
     }
   }
