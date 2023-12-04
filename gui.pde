@@ -23,78 +23,32 @@ public void custom_slider1_change1(GCustomSlider source, GEvent event) { //CODE:
 } //CODE:custom_slider1:398991:
 public int StartOfNewMonth, AddedIncriments;
 public void button1_click1(GButton source, GEvent event) { //CODE:button1:825285:
-  int[] EasyDifficulty = {2,5,9,14};
-  int[] MediumDifficulty = {2,4,6,9,11,14};
-  int[] HardDifficulty = {2,4,6,8,10,14,16,20,24};
   String eventName = textfield1.getText(); //get text in textfield1
   int CurrentMonth = month;
   Event newEvent = new Event(eventName, custom_slider1.getValueI(), year, month, dayBeingShown); //create new event
   Days[year-startingYear][month-1][dayBeingShown - 1].events.add(newEvent); //add event to the particular day
-  if (custom_slider1.getValueI() == 1) {
-    boolean NewMonth = false;
-    for (int n = 0; n < lengthOfMonth(year, CurrentMonth); n++){
-      if (isValueInArray(n+1,EasyDifficulty)){
-        if (dayBeingShown - 1 + n < lengthOfMonth(year, CurrentMonth)){
-          Days[year-startingYear][CurrentMonth - 1][dayBeingShown - 1 + n].events.add(newEvent);
-        }
-        else if ((dayBeingShown - 1) + (n+1)> lengthOfMonth(year, CurrentMonth) && NewMonth == false){ 
-          NewMonth = true;
-          StartOfNewMonth = ((dayBeingShown - 1) + (n+1)) - lengthOfMonth(year, CurrentMonth) - 1;
-          AddedIncriments = n - StartOfNewMonth;
-          CurrentMonth = CurrentMonth + 1;
-          Days[year-startingYear][CurrentMonth - 1][StartOfNewMonth + AddedIncriments - 1].events.add(newEvent);
-        }
-        else if (NewMonth == true){
-          AddedIncriments = n - StartOfNewMonth;
-          Days[year-startingYear][CurrentMonth - 1][StartOfNewMonth + AddedIncriments - 1].events.add(newEvent);
-        }
+    
+  boolean NewMonth = false;
+  
+  for (int n = 0; n < lengthOfMonth(year, CurrentMonth); n++){
+    if (isValueInArray(n+1, difficulties[custom_slider1.getValueI() - 1])){
+      if (dayBeingShown - 1 + n < lengthOfMonth(year, CurrentMonth)){
+        Days[year-startingYear][CurrentMonth - 1][dayBeingShown - 1 + n].events.add(newEvent);
       }
-    }
-  }
-  else if (custom_slider1.getValueI() == 2){
-    boolean NewMonth = false;
-    for (int n = 0; n < lengthOfMonth(year, CurrentMonth); n++){
-      if (isValueInArray(n+1,MediumDifficulty)){
-        if (dayBeingShown - 1 + n < lengthOfMonth(year, CurrentMonth)){
-          Days[year-startingYear][CurrentMonth - 1][dayBeingShown - 1 + n].events.add(newEvent);
-        }
-        else if ((dayBeingShown - 1) + (n+1)> lengthOfMonth(year, CurrentMonth) && NewMonth == false){
-          NewMonth = true;
-          StartOfNewMonth = ((dayBeingShown - 1) + (n+1)) - lengthOfMonth(year, CurrentMonth) - 1;
-          AddedIncriments = n - StartOfNewMonth;
-          CurrentMonth = CurrentMonth + 1;
-          Days[year-startingYear][CurrentMonth - 1][StartOfNewMonth + AddedIncriments - 1].events.add(newEvent);
-        }
-        else if (NewMonth == true){
-          AddedIncriments = n - StartOfNewMonth;
-          Days[year-startingYear][CurrentMonth - 1][StartOfNewMonth + AddedIncriments - 1].events.add(newEvent);
-        }
+      else if ((dayBeingShown - 1) + (n+1)> lengthOfMonth(year, CurrentMonth) && NewMonth == false){ 
+        NewMonth = true;
+        StartOfNewMonth = ((dayBeingShown - 1) + (n+1)) - lengthOfMonth(year, CurrentMonth) - 1;
+        AddedIncriments = n - StartOfNewMonth;
+        CurrentMonth = CurrentMonth + 1;
+        Days[year-startingYear][CurrentMonth - 1][StartOfNewMonth + AddedIncriments - 1].events.add(newEvent);
       }
-    }
-  }
-  else if (custom_slider1.getValueI() == 3){
-    boolean NewMonth = false;
-    for (int n = 0; n < lengthOfMonth(year, CurrentMonth); n++){
-      if (isValueInArray(n+1,HardDifficulty)){
-        if (dayBeingShown - 1 + n < lengthOfMonth(year, CurrentMonth) && NewMonth == false){
-          Days[year-startingYear][CurrentMonth - 1][dayBeingShown - 1 + n].events.add(newEvent);
-        }
-        else if ((dayBeingShown - 1) + (n+1)> lengthOfMonth(year, CurrentMonth) && NewMonth == false){ 
-          NewMonth = true;
-          StartOfNewMonth = ((dayBeingShown - 1) + (n+1)) - lengthOfMonth(year, CurrentMonth) - 1;
-          AddedIncriments = n - StartOfNewMonth;
-          CurrentMonth = CurrentMonth + 1;
-          Days[year-startingYear][CurrentMonth - 1][StartOfNewMonth + AddedIncriments - 1].events.add(newEvent);
-        }
-        else if (NewMonth == true){
-          AddedIncriments = n - StartOfNewMonth;
-          Days[year-startingYear][CurrentMonth - 1][StartOfNewMonth + AddedIncriments - 1].events.add(newEvent);
-        }
+      else if (NewMonth == true){
+        AddedIncriments = n - StartOfNewMonth;
+        Days[year-startingYear][CurrentMonth - 1][StartOfNewMonth + AddedIncriments - 1].events.add(newEvent);
       }
     }
   }
   textfield1.setText(""); //reset text in textfield1
-
 } //CODE:button1:825285:
 
 

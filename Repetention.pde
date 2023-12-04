@@ -27,6 +27,11 @@ String[] daysOfWeek = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 color circleCol = color(150);
 int circleSize = 20;
 
+int[] easyDifficulty = {2,5,9,14};
+int[] mediumDifficulty = {2,4,6,9,11,14};
+int[] hardDifficulty = {2,4,6,8,10,14,16,20,24};
+
+int[][] difficulties = {easyDifficulty, mediumDifficulty, hardDifficulty};
 
 Day[][][] Days;
 
