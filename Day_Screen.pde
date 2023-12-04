@@ -16,6 +16,8 @@ void drawDayScreen(int month, int day) {
   text("Finished!", 740, 92);
   checkmark = loadImage("green check.png");
   xMark = loadImage("x mark.png");
+  emptyBucket = loadImage("empty bucket icon.png");
+  fullBucket = loadImage("full bucket icon.png");
   image(checkmark, 843, 65, 40, 40);
   
   button1.setVisible(true);
@@ -35,10 +37,15 @@ void drawDayScreen(int month, int day) {
     image(xMark, 600, 145+35*i, 20, 20);
     textSize(13);
     text("Delete Event", 627, 160+35*i);
+    if (Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN == false)
+      image(emptyBucket, 727, 145+35*i, 25, 25);
+    else
+      image(fullBucket, 727, 145+35*i, 25, 25);
     fill(255);
   }
   
   if (mousePressed == true) {
+    
     //If clicked the "finished!" button
     if(mouseX >= 840 && mouseX <= 885) {
       if (mouseY >= 65 && mouseY <= 105) {
@@ -50,42 +57,11 @@ void drawDayScreen(int month, int day) {
     }
     
     //if clicked "delete" an event
-    for (int i=0; i < currentDay.events.size(); i++) { //check for each event
+    for (int i=0; i<Days[year-startingYear][month-1][dayBeingShown - 1].events.size(); i++) { //check for each event
       if (mouseX >= 594 && mouseX <= 700) {
         if (mouseY >=140+35*i && mouseY <= 164+35*i) {
-          
-          String eventName = currentDay.events.get(i).name;     
-          boolean NewMonth = false;
-          
-          int pseudoYear = currentDay.events.get(i).firstYear;
-          int pseudoMonth = currentDay.events.get(i).firstMonth;
-          int pseudoDay = currentDay.events.get(i).firstDay;
-          
-          int numberDifficulty = Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).difficulty;                            
-          
-          removeEvent(eventName, Days[pseudoYear - startingYear][ pseudoMonth - 1][pseudoDay - 1]);
-          
-          for (int n = 0; n < lengthOfMonth(pseudoYear, pseudoMonth); n++){
-            if (isValueInArray(n+1, difficulties[numberDifficulty - 1])){
-              if (pseudoDay - 1 + n < lengthOfMonth(pseudoYear, pseudoMonth)){
-                removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][pseudoDay - 1 + n]);
-              }
-              
-              else if ((pseudoDay - 1) + (n+1)> lengthOfMonth(pseudoYear, pseudoMonth) && NewMonth == false){ 
-                NewMonth = true;
-                StartOfNewMonth = ((pseudoDay - 1) + (n+1)) - lengthOfMonth(pseudoYear, pseudoMonth) - 1;
-                pseudoMonth = pseudoMonth + 1;
-                removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][StartOfNewMonth]);
-                AddedIncriments = n - StartOfNewMonth;
-              }
-              
-              else if (NewMonth == true){
-                removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][StartOfNewMonth + AddedIncriments - 1]); 
-                AddedIncriments = n - StartOfNewMonth - (lengthOfMonth(pseudoYear, pseudoMonth)- pseudoDay);
-                       
-              }
-            }
-          }
+          Days[year-startingYear][month-1][dayBeingShown - 1].events.remove(i);
+          print("deleted");
         }
       }
     }
