@@ -94,9 +94,9 @@ void drawDayScreen(int month, int day) {
               }
             }
           }
-        }  
-        rect(93,480, 570,520); //border around text field
+        }          
       }
     }
   }
+  rect(93,480, 570,520); //border around text field
 }
