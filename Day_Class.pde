@@ -59,6 +59,7 @@ class Day {
       fill(circleCol);
       noStroke();
       circle(this.x + this.SizeX/2.0, this.y + this.SizeY/2.0, circleSize);
+      stroke(1);
     }
   }
 }
