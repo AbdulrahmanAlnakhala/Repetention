@@ -35,6 +35,7 @@ int[][] difficulties = {easyDifficulty, mediumDifficulty, hardDifficulty};
 
 Day[][][] Days;
 
+
 void setup() {
   size(1000, 600);
   createGUI();

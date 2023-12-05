@@ -109,9 +109,15 @@ void drawCalendar() {
   textfield1.setVisible(false);
       
   stroke(255);
+  textSize(18);
+  fill(0, 129, 201);
+  text("Repetention 1.0: Helping you retain all that you learn", 320, 30);
+  
+  
+  
+  
   textSize(60);
   fill(255);
-  
   text(nameOfMonth(month) + " " + year, 75, textHeight+10);
   
   rightArrow = loadImage("right-arrow-for-next-month.png");
@@ -157,8 +163,6 @@ boolean isValueInArray(int value, int[] array) {
     }
     return false;
 }
-
-
 
 
 void removeEvent(String eventName, Day day){

@@ -97,6 +97,20 @@ void drawDayScreen(int month, int day) {
         }          
       }
     }
+    
+      //If turn an event into type bucket list
+    for (int i=0; i<Days[year-startingYear][month-1][dayBeingShown - 1].events.size(); i++) { //check for each event
+      if (mouseX >= 720 && mouseX <= 759) {
+        if (mouseY >=138+35*i && mouseY <= 169+35*i) {
+          Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN = !Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN;
+          if (Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN == false)
+            image(emptyBucket, 727, 145+35*i, 25, 25);
+          else
+            image(fullBucket, 727, 145+35*i, 25, 25);
+          print(Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN);
+        }
+      }
+    }
   }
   rect(93,480, 570,520); //border around text field
 }
