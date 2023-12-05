@@ -52,9 +52,4 @@ void draw() {
     //month, day
     drawDayScreen(month, dayBeingShown);
   }
-
-  for (int i=0; i < 7; i++) {
-    textSize(18);
-    text(daysOfWeek[i], paddingX + (paddingX/2.0) + 25 + daySizeX * i, 165);
-  }
 }

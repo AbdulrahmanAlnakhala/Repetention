@@ -113,9 +113,6 @@ void drawCalendar() {
   fill(0, 129, 201);
   text("Repetention 1.0: Helping you retain all that you learn", 320, 30);
   
-  
-  
-  
   textSize(60);
   fill(255);
   text(nameOfMonth(month) + " " + year, 75, textHeight+10);
@@ -150,8 +147,13 @@ void drawCalendar() {
   }
   
   //Draws calendar days
-  for(int i = 0; i < lengthOfMonth(year, month); i++)
+  for(int i = 0; i < lengthOfMonth(year, month); i++)  
     Days[year - startingYear][month - 1][i].DrawMe();  
+
+  for (int i=0; i < 7; i++) {
+    textSize(18);
+    text(daysOfWeek[i], paddingX + (paddingX/2.0) + 25 + daySizeX * i, 165);
+  }
 }
 
 
