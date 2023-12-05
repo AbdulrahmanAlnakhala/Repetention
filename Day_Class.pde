@@ -55,11 +55,14 @@ class Day {
       text(this.dayNum, this.x + 5, this.y + 20);      
     }
     
-    if(this.events.size() > 0){  
-      fill(circleCol);
-      noStroke();
-      circle(this.x + this.SizeX/2.0, this.y + this.SizeY/2.0, circleSize);
-      stroke(1);
+    for(int i = 0; i < this.events.size(); i++){
+      if(!this.events.get(i).bucketList_YorN){  
+        fill(circleCol);
+        noStroke();
+        circle(this.x + this.SizeX/2.0, this.y + this.SizeY/2.0, circleSize);
+        stroke(1);
+        i = this.events.size();
+      }
     }
   }
 }
