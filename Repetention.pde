@@ -25,6 +25,7 @@ int[] monthLengths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 String[] daysOfWeek = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
 color circleCol = color(0, 129, 201);
+color BucketListCircleCol = color(164,174,191);
 int circleSize = 20;
 
 int[] easyDifficulty = {2,5,9,14};

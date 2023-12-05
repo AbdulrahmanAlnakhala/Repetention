@@ -111,7 +111,7 @@ void drawCalendar() {
   stroke(255);
   textSize(18);
   fill(0, 129, 201);
-  text("Repetention 1.0: Helping you retain all that you learn", 320, 30);
+  text("Repetention 1.0: The Calendar You'll Never Forget.", 320, 30);
   
   textSize(60);
   fill(255);

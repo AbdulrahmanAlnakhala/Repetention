@@ -59,9 +59,16 @@ class Day {
       if(!this.events.get(i).bucketList_YorN){  
         fill(circleCol);
         noStroke();
-        circle(this.x + this.SizeX/2.0, this.y + this.SizeY/2.0, circleSize);
+        circle(this.x + this.SizeX/3.0, this.y + this.SizeY/2.0, circleSize);
         stroke(1);
-        i = this.events.size();
+        //i = this.events.size();
+      }
+      else if(this.events.get(i).bucketList_YorN){
+        fill(BucketListCircleCol);
+        noStroke();
+        circle(this.x + this.SizeX/1.5, this.y + this.SizeY/2.0, circleSize);
+        stroke(1);
+        //i = this.events.size();
       }
     }
   }
