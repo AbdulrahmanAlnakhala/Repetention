@@ -55,21 +55,25 @@ class Day {
       text(this.dayNum, this.x + 5, this.y + 20);      
     }
     
+    boolean taskDot = false;
+    boolean bucketDot = false;
+    
     for(int i = 0; i < this.events.size(); i++){
-      if(!this.events.get(i).bucketList_YorN){  
+      if(!this.events.get(i).bucketList_YorN && !bucketDot){  
         fill(circleCol);
         noStroke();
         circle(this.x + this.SizeX/3.0, this.y + this.SizeY/2.0, circleSize);
-        stroke(1);
-        //i = this.events.size();
+        stroke(1);        
       }
-      else if(this.events.get(i).bucketList_YorN){
+      else if(this.events.get(i).bucketList_YorN && !taskDot){
         fill(BucketListCircleCol);
         noStroke();
         circle(this.x + this.SizeX/1.5, this.y + this.SizeY/2.0, circleSize);
-        stroke(1);
-        //i = this.events.size();
+        stroke(1);        
       }
+      
+      if(taskDot && bucketDot)
+        i = this.events.size();
     }
   }
 }
