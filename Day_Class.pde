@@ -59,21 +59,37 @@ class Day {
     boolean bucketDot = false;
     
     for(int i = 0; i < this.events.size(); i++){
-      if(!this.events.get(i).bucketList_YorN && !bucketDot){  
-        fill(circleCol);
-        noStroke();
-        circle(this.x + this.SizeX/3.0, this.y + this.SizeY/2.0, circleSize);
-        stroke(1);        
-      }
-      else if(this.events.get(i).bucketList_YorN && !taskDot){
-        fill(BucketListCircleCol);
-        noStroke();
-        circle(this.x + this.SizeX/1.5, this.y + this.SizeY/2.0, circleSize);
-        stroke(1);        
-      }
+      if(!this.events.get(i).bucketList_YorN && !bucketDot)          
+        bucketDot = true;
+      
+      else if(this.events.get(i).bucketList_YorN && !taskDot)        
+        taskDot = true;      
       
       if(taskDot && bucketDot)
         i = this.events.size();
+    }
+    
+    if(taskDot && bucketDot){
+      noStroke();
+      fill(circleCol);
+      circle(this.x + this.SizeX/1.5, this.y + this.SizeY/2.0, circleSize);      
+      fill(BucketListCircleCol);
+      circle(this.x + this.SizeX/3.0, this.y + this.SizeY/2.0, circleSize);              
+      stroke(1);      
+    }
+    
+    else if(taskDot){
+      fill(circleCol);
+      noStroke();
+      circle(this.x + this.SizeX/2.0, this.y + this.SizeY/2.0, circleSize);
+      stroke(1);      
+    }
+    
+    else if(bucketDot){
+      fill(BucketListCircleCol);
+      noStroke();
+      circle(this.x + this.SizeX/2.0, this.y + this.SizeY/2.0, circleSize);
+      stroke(1);
     }
   }
 }
