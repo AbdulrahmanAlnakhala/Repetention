@@ -100,8 +100,7 @@ void drawDayScreen(int month, int day) {
               else if (NewMonth == true){                
                 AddedIncriments = n - StartOfNewMonth - (lengthOfMonth(pseudoYear, pseudoMonth) - pseudoDay);
                 removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][StartOfNewMonth + AddedIncriments - 1]);                            
-              }
-              println(pseudoYear, pseudoMonth, StartOfNewMonth + AddedIncriments);
+              }              
             }            
           }          
         }          
