@@ -34,8 +34,10 @@ int[] hardDifficulty = {2,4,6,8,10,14,16,20,24};
 
 int[][] difficulties = {easyDifficulty, mediumDifficulty, hardDifficulty};
 
-Day[][][] Days;
+String[] affirmations = {"I'm Happy. Unbothered. Disciplined. Glowing.", "I am EXCITED about today.", "I am deliberate and afraid of nothing.", "Progress is never linear."}; 
+String topScreenText = "Repetention 1.0: The Calendar You'll Never Forget.";
 
+Day[][][] Days;
 
 void setup() {
   size(1000, 600);

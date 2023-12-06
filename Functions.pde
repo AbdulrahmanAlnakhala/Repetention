@@ -111,7 +111,7 @@ void drawCalendar() {
   stroke(255);
   textSize(18);
   fill(0, 129, 201);
-  text("Repetention 1.0: The Calendar You'll Never Forget.", 320, 30);
+  text(topScreenText, 320, 30);
   
   textSize(60);
   fill(255);
@@ -172,4 +172,8 @@ void removeEvent(String eventName, Day day){
     if(day.events.get(i).name == eventName)
       day.events.remove(i);
   }
+}
+
+void randomizeAffirmation(){
+  topScreenText = affirmations[floor(random(0, affirmations.length))];
 }

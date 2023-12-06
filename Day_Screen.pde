@@ -53,6 +53,7 @@ void drawDayScreen(int month, int day) {
         textfield1.setVisible(false);
         custom_slider1.setVisible(false);
         DrawOnce = true;
+        randomizeAffirmation();
       }
     }
     
