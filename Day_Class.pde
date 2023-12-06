@@ -45,14 +45,27 @@ class Day {
       this.Colour = color(255);
     
     fill(this.Colour);
-    rectMode(CORNERS);
+    rectMode(CORNERS);    
     rect(this.x, this.y, this.x+this.SizeX, this.y + this.SizeY);    
     
     fill(0);
     textSize(15);
     stroke(0);
     if(this.dayNum > 0){
-      text(this.dayNum, this.x + 5, this.y + 20);      
+      if((this.dayNum == day()) && (month == month()) && (year == year())  ){        
+        noStroke();
+        fill(todayCol);
+        circle(this.x + 15, this.y + 15, 23);                        
+        textSize(18);                
+        fill(255);
+        text(this.dayNum, this.x + 15, this.y + 20);
+        fill(0);
+        textSize(15);
+        stroke(1);
+      }
+      
+      else
+        text(this.dayNum, this.x + 15, this.y + 20);             
     }
     
     boolean taskDot = false;

@@ -26,6 +26,7 @@ String[] daysOfWeek = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
 color circleCol = color(0, 129, 201);
 color BucketListCircleCol = color(164,174,191);
+color todayCol = color (200, 0, 50);
 int circleSize = 20;
 
 int[] easyDifficulty = {2,5,9,14};
@@ -43,7 +44,8 @@ void setup() {
   size(1000, 600);
   createGUI();
   Days = new Day[yearAmt][12][31]; //Day class[years][months][days]
-  setupCalendar();
+  textAlign(CENTER);  
+  setupCalendar();  
 }
 
 

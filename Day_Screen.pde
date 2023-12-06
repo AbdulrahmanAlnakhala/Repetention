@@ -7,13 +7,15 @@ void drawDayScreen(int month, int day) {
   fill(255);
   rectMode(CORNERS);  
   
+  textAlign(LEFT);
   text(nameOfMonth(month) + " " + day, 100,93);
+  textAlign(CENTER);
   
   rect(0+padding, 120, width-padding, height-padding);
   rect(0+padding, 470, width-padding, height-padding);
   
   textSize(23);
-  text("Finished!", 740, 92);
+  text("Finished!", 780, 92);
   checkmark = loadImage("green check.png");
   xMark = loadImage("x mark.png");
   emptyBucket = loadImage("empty bucket icon.png");
@@ -27,7 +29,7 @@ void drawDayScreen(int month, int day) {
   //Difficulty/priority text
   textSize(14);
   fill(0,0,255);
-  text("Difficulty/Priority", 610, 486);
+  text("Difficulty/Priority", 660, 486);
   fill(255);
   
   for (int i=0; i < currentDay.events.size(); i++) {
@@ -36,7 +38,7 @@ void drawDayScreen(int month, int day) {
     text(currentDay.events.get(i).name, 96, 160+35*i); //9 event maximum
     image(xMark, 600, 145+35*i, 20, 20);
     textSize(13);
-    text("Delete Event", 627, 160+35*i);
+    text("Delete Event", 660, 160+35*i);
     if (Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN == false)
       image(emptyBucket, 727, 145+35*i, 25, 25);
     else
@@ -60,9 +62,7 @@ void drawDayScreen(int month, int day) {
     //if clicked "delete" an event
     for (int i=0; i<currentDay.events.size(); i++) { //check for each event
       if (mouseX >= 594 && mouseX <= 700) {
-        if (mouseY >=140+35*i && mouseY <= 164+35*i) {
-          //Days[year-startingYear][month-1][dayBeingShown - 1].events.remove(i);
-          //print("deleted");
+        if (mouseY >=140+35*i && mouseY <= 164+35*i) {          
                     
           String eventName = currentDay.events.get(i).name;     
           boolean NewMonth = false;
@@ -84,16 +84,16 @@ void drawDayScreen(int month, int day) {
               else if ((pseudoDay - 1) + (n+1)> lengthOfMonth(pseudoYear, pseudoMonth) && NewMonth == false){ 
                 NewMonth = true;
                 
-                StartOfNewMonth = ((pseudoDay - 1) + (n+1)) - lengthOfMonth(pseudoYear, pseudoMonth - 1);
+                StartOfNewMonth = ((pseudoDay - 1) + (n+1)) - lengthOfMonth(pseudoYear, pseudoMonth) - 1;
                 pseudoMonth = pseudoMonth + 1;                
                 
                 if (pseudoMonth == 13){ // small issue but ill ask Teja how to deal with it
                   pseudoMonth = 1;
                   pseudoYear += 1; 
                 }                               
-                
-                AddedIncriments = n - StartOfNewMonth - (lengthOfMonth(pseudoYear, pseudoMonth) - pseudoDay);                
-                removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][StartOfNewMonth + AddedIncriments - 1]);                
+                                
+                removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][StartOfNewMonth]);
+                AddedIncriments = n - StartOfNewMonth;
               }
 
               

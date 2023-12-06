@@ -48,7 +48,7 @@ void mousePressed() {
   boolean firstJan = (year == startingYear) && (month == 1);
   boolean lastDay = (year == startingYear + yearAmt - 1) && (month == 12); //Prevents calendar from going out of bounds
   
-  if ((dist(mouseX, mouseY, width - paddingX - imageSize/2.0, textHeight - imageSize/2) <= imageSize/2.0) && (DrawDayScreen == false) && !lastDay) {    
+  if ((dist(mouseX, mouseY, width - paddingX - imageSize/2.0, textHeight - imageSize/2.0) <= imageSize/2.0) && (DrawDayScreen == false) && !lastDay) {    
     month += 1;    
     if(month == 13) {
       month = 1;
@@ -56,7 +56,7 @@ void mousePressed() {
     }      
   } 
   
-  else if ((dist(mouseX, mouseY, width - paddingX - imageSize - imageSize/2.0, textHeight - imageSize/2) <= imageSize/2.0) && (DrawDayScreen == false) && !firstJan) {       
+  else if ((dist(mouseX, mouseY, paddingX + imageSize/2.0, textHeight - imageSize/2.0) <= imageSize/2.0) && (DrawDayScreen == false) && !firstJan) {       
     month -= 1;
     if(month == 0) {
       month = 12;
@@ -111,17 +111,17 @@ void drawCalendar() {
   stroke(255);
   textSize(18);
   fill(0, 129, 201);
-  text(topScreenText, 320, 30);
+  text(topScreenText, width/2.0, 30);
   
   textSize(60);
   fill(255);
-  text(nameOfMonth(month) + " " + year, 75, textHeight+10);
+  text(nameOfMonth(month) + " " + year, width/2.0, textHeight+10);
   
   rightArrow = loadImage("right-arrow-for-next-month.png");
-  image(rightArrow, width - paddingX - imageSize, textHeight-imageSize/2 - 10, imageSize, imageSize);
+  image(rightArrow, width - paddingX - imageSize, textHeight-imageSize/2.0 - 10, imageSize, imageSize);
   
   leftArrow = loadImage("left-arrow-for-previous-month.png");
-  image(leftArrow, width - paddingX - 2*imageSize, textHeight - imageSize/2 - 10, imageSize, imageSize);        
+  image(leftArrow, paddingX, textHeight - imageSize/2.0 - 10, imageSize, imageSize);        
   
   textSize(10);
   stroke(0);
@@ -152,7 +152,7 @@ void drawCalendar() {
 
   for (int i=0; i < 7; i++) {
     textSize(18);
-    text(daysOfWeek[i], paddingX + (paddingX/2.0) + 25 + daySizeX * i, 165);
+    text(daysOfWeek[i], paddingX + daySizeX * (i + 0.5), 165);
   }
 }
 
