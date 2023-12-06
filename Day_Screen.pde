@@ -63,7 +63,7 @@ void drawDayScreen(int month, int day) {
         if (mouseY >=140+35*i && mouseY <= 164+35*i) {
           //Days[year-startingYear][month-1][dayBeingShown - 1].events.remove(i);
           //print("deleted");
-          
+                    
           String eventName = currentDay.events.get(i).name;     
           boolean NewMonth = false;
           
@@ -71,30 +71,39 @@ void drawDayScreen(int month, int day) {
           int pseudoMonth = currentDay.events.get(i).firstMonth;
           int pseudoDay = currentDay.events.get(i).firstDay;
           
-          int numberDifficulty = Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).difficulty;                            
+          int numberDifficulty = Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).difficulty;                                                
           
           removeEvent(eventName, Days[pseudoYear - startingYear][ pseudoMonth - 1][pseudoDay - 1]);
           
-          for (int n = 0; n < lengthOfMonth(pseudoYear, pseudoMonth); n++){
-            if (isValueInArray(n+1, difficulties[numberDifficulty - 1])){
-              if (pseudoDay - 1 + n < lengthOfMonth(pseudoYear, pseudoMonth)){
+          for (int n = 0; n < lengthOfMonth(pseudoYear, pseudoMonth); n++){                                               
+            if (isValueInArray(n + 1, difficulties[numberDifficulty - 1])){
+              if (pseudoDay - 1 + n < lengthOfMonth(pseudoYear, pseudoMonth)){                
                 removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][pseudoDay - 1 + n]);
               }
               
               else if ((pseudoDay - 1) + (n+1)> lengthOfMonth(pseudoYear, pseudoMonth) && NewMonth == false){ 
                 NewMonth = true;
-                StartOfNewMonth = ((pseudoDay - 1) + (n+1)) - lengthOfMonth(pseudoYear, pseudoMonth) - 1;
-                pseudoMonth = pseudoMonth + 1;
-                removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][StartOfNewMonth]);
-                AddedIncriments = n - StartOfNewMonth;
+                
+                StartOfNewMonth = ((pseudoDay - 1) + (n+1)) - lengthOfMonth(pseudoYear, pseudoMonth - 1);
+                pseudoMonth = pseudoMonth + 1;                
+                
+                if (pseudoMonth == 13){ // small issue but ill ask Teja how to deal with it
+                  pseudoMonth = 1;
+                  pseudoYear += 1; 
+                }                               
+                
+                AddedIncriments = n - StartOfNewMonth - (lengthOfMonth(pseudoYear, pseudoMonth) - pseudoDay);                
+                removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][StartOfNewMonth + AddedIncriments - 1]);                
               }
+
               
-              else if (NewMonth == true){
-                removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][StartOfNewMonth + AddedIncriments - 1]); 
-                AddedIncriments = n - StartOfNewMonth - (lengthOfMonth(pseudoYear, pseudoMonth)- pseudoDay);
+              else if (NewMonth == true){                
+                AddedIncriments = n - StartOfNewMonth - (lengthOfMonth(pseudoYear, pseudoMonth) - pseudoDay);
+                removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][StartOfNewMonth + AddedIncriments - 1]);                            
               }
-            }
-          }
+              println(pseudoYear, pseudoMonth, StartOfNewMonth + AddedIncriments);
+            }            
+          }          
         }          
       }
     }
@@ -107,8 +116,7 @@ void drawDayScreen(int month, int day) {
           if (Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN == false)
             image(emptyBucket, 727, 145+35*i, 25, 25);
           else
-            image(fullBucket, 727, 145+35*i, 25, 25);
-          print(Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN);
+            image(fullBucket, 727, 145+35*i, 25, 25);          
         }
       }
     }
