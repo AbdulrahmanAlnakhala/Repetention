@@ -35,6 +35,7 @@ void drawDayScreen(int month, int day) {
   for (int i=0; i < currentDay.events.size(); i++) {
     fill(0);
     textSize(20);
+    textAlign(LEFT);
     text(currentDay.events.get(i).name, 96, 160+35*i); //9 event maximum
     image(xMark, 600, 145+35*i, 20, 20);
     textSize(13);
