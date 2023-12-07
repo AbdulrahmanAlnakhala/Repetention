@@ -37,6 +37,7 @@ void drawDayScreen(int month, int day) {
     textSize(20);
     textAlign(LEFT);
     text(currentDay.events.get(i).name, 96, 160+35*i); //9 event maximum
+    textAlign(CENTER);
     image(xMark, 600, 145+35*i, 20, 20);
     textSize(13);
     text("Delete Event", 660, 160+35*i);
