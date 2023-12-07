@@ -11,8 +11,8 @@ int calDownShift = 80; //This pushes all of the calendar to be underneath the we
 
 int days = 7;
 //int weeks = 6;
-int month = 12;
-int year = 2023;            //For max efficiency, you can see up to 3 years in the future.
+int month = month();
+int year = year();            //For max efficiency, you can see up to 3 years in the future.
 int startingYear = year;
 int yearAmt = 10;           //This is why you can see three years into the future! Change if you want
 int dayBeingShown = 1;
