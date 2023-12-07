@@ -57,7 +57,7 @@ void drawDayScreen(int month, int day) {
         textfield1.setVisible(false);
         custom_slider1.setVisible(false);
         DrawOnce = true;
-        randomizeAffirmation();
+        randomizeAffirmation();        
       }
     }
     
@@ -75,7 +75,8 @@ void drawDayScreen(int month, int day) {
           
           int numberDifficulty = Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).difficulty;                                                
           
-          removeEvent(eventName, Days[pseudoYear - startingYear][ pseudoMonth - 1][pseudoDay - 1]);
+          removeEventFromTXT(currentDay.events.get(i));
+          removeEvent(eventName, Days[pseudoYear - startingYear][ pseudoMonth - 1][pseudoDay - 1]);          
           
           for (int n = 0; n < lengthOfMonth(pseudoYear, pseudoMonth); n++){                                               
             if (isValueInArray(n + 1, difficulties[numberDifficulty - 1])){
@@ -113,7 +114,8 @@ void drawDayScreen(int month, int day) {
     for (int i=0; i<Days[year-startingYear][month-1][dayBeingShown - 1].events.size(); i++) { //check for each event
       if (mouseX >= 720 && mouseX <= 759) {
         if (mouseY >=138+35*i && mouseY <= 169+35*i) {
-          Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN = !Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN;
+          changeBucketBoolean(currentDay.events.get(i));
+          currentDay.events.get(i).bucketList_YorN = !Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN;
           if (Days[year-startingYear][month-1][dayBeingShown - 1].events.get(i).bucketList_YorN == false)
             image(emptyBucket, 727, 145+35*i, 25, 25);
           else

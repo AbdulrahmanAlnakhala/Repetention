@@ -4,12 +4,12 @@ class Event{
   int firstYear, firstMonth, firstDay;
   boolean bucketList_YorN;
   
-  Event(String n, int d, int y, int m, int day) {
+  Event(String n, int d, int y, int m, int day, boolean bucket) {
   this.name = n;
   this.difficulty = d;
   this.firstYear = y;
   this.firstMonth = m;
   this.firstDay = day;
-  this.bucketList_YorN = false;
+  this.bucketList_YorN = bucket;
   }
 }

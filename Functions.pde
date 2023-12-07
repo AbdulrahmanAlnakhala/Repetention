@@ -177,3 +177,136 @@ void removeEvent(String eventName, Day day){
 void randomizeAffirmation(){
   topScreenText = affirmations[floor(random(0, affirmations.length))];
 }
+
+void addTXTEvents(){
+  String[] eventsMemory = loadStrings("events.txt");
+  for (int i = 0 ; i < eventsMemory.length; i++) {
+    String[] eventInfo = split(eventsMemory[i], " "); //(eventName + " " + custom_slider1.getValueI() + " " + year + " " + month + " " + dayBeingShown);
+    
+    String eventName = eventInfo[0];
+    int eventDifficulty = int(eventInfo[1]);
+    int eventYear = int(eventInfo[2]);
+    int eventMonth = int(eventInfo[3]);
+    int eventDay = int(eventInfo[4]);
+    boolean eventBucket = boolean(eventInfo[5]);
+    
+    int pseudoEventYear = int(eventInfo[2]);
+    int pseudoEventMonth = int(eventInfo[3]);
+    
+    boolean NewMonth = false;
+            
+    if(0 <= eventYear - startingYear && eventYear - startingYear < yearAmt){
+      Event newEvent = new Event(eventName, eventDifficulty, eventYear, eventMonth, eventDay, eventBucket); //create new event
+      
+      Days[eventYear - startingYear][eventMonth - 1][eventDay - 1].events.add(newEvent); //add event to the particular day
+      
+      for (int n = 0; n < lengthOfMonth(eventYear, eventMonth); n++){
+        try{  
+          if (isValueInArray(n+1, difficulties[eventDifficulty - 1])){
+            if (eventDay - 1 + n < lengthOfMonth(pseudoEventYear, pseudoEventMonth)){
+              Days[eventYear - startingYear][eventMonth - 1][eventDay - 1 + n].events.add(newEvent);
+            }
+            
+            else if ((eventDay - 1) + (n+1)> lengthOfMonth(pseudoEventYear, pseudoEventMonth) && NewMonth == false){ 
+              NewMonth = true;
+              StartOfNewMonth = ((eventDay - 1) + (n+1)) - lengthOfMonth(pseudoEventYear, pseudoEventMonth) - 1;
+              pseudoEventMonth = pseudoEventMonth + 1;
+              if (pseudoEventMonth == 13){
+                pseudoEventMonth = 1;
+                pseudoEventYear += 1;  
+              }
+              Days[pseudoEventYear-startingYear][pseudoEventMonth - 1][StartOfNewMonth].events.add(newEvent);
+              AddedIncriments = n - StartOfNewMonth;
+            }
+            
+            else if (NewMonth == true){
+              AddedIncriments = n - StartOfNewMonth - (lengthOfMonth(pseudoEventYear, pseudoEventMonth)- newEvent.firstDay);
+              Days[pseudoEventYear-startingYear][pseudoEventMonth - 1][StartOfNewMonth + AddedIncriments - 1].events.add(newEvent);
+            }
+          }
+        }
+        catch(Exception e){}
+      }  
+    }
+  }
+}
+
+void removeEventFromTXT(Event e){
+  String[] eventsMemory = loadStrings("events.txt");
+  ArrayList<String> newEventsTXTFile = new ArrayList<String>();
+  
+  for (int i = 0 ; i < eventsMemory.length; i++) {
+    String[] eventInfo = split(eventsMemory[i], " "); //(eventName + " " + custom_slider1.getValueI() + " " + year + " " + month + " " + dayBeingShown + " " + bucketList_YorN);
+    boolean nameEqual = e.name.equals(eventInfo[0]);
+    boolean difficultyEqual = e.difficulty == int(eventInfo[1]);
+    boolean yearEqual = e.firstYear == int(eventInfo[2]);
+    boolean monthEqual = e.firstMonth == int(eventInfo[3]);
+    boolean dayEqual = e.firstDay == int(eventInfo[4]);
+    boolean bucketEqual = e.bucketList_YorN == boolean(eventInfo[5]);
+    
+    if(nameEqual && difficultyEqual && yearEqual && monthEqual && dayEqual && bucketEqual){}
+    
+    else
+      newEventsTXTFile.add(eventsMemory[i]);
+  }
+  
+  eventsTxt = createWriter("events.txt");
+  
+  for(int i = 0; i < newEventsTXTFile.size(); i ++)
+    eventsTxt.println(newEventsTXTFile.get(i));
+  eventsTxt.flush();
+}
+
+
+
+void addEventToTXT(Event e){
+  String[] eventsMemory = loadStrings("events.txt");
+  ArrayList<String> newEventsTXTFile = new ArrayList<String>();
+  
+  for (int i = 0 ; i < eventsMemory.length; i++) 
+    newEventsTXTFile.add(eventsMemory[i]);
+  
+  newEventsTXTFile.add(e.name + " " + e.difficulty + " " + e.firstYear + " " + e.firstMonth + " " + e.firstDay + " " + e.bucketList_YorN);
+  
+  eventsTxt = createWriter("events.txt");
+  
+  for(int i = 0; i < newEventsTXTFile.size(); i++)
+    eventsTxt.println(newEventsTXTFile.get(i));
+  eventsTxt.flush();
+}
+
+
+
+void changeBucketBoolean(Event e){
+    String[] eventsMemory = loadStrings("events.txt");
+  ArrayList<String> newEventsTXTFile = new ArrayList<String>();
+  
+  for (int i = 0 ; i < eventsMemory.length; i++) {
+    String[] eventInfo = split(eventsMemory[i], " "); //(eventName + " " + custom_slider1.getValueI() + " " + year + " " + month + " " + dayBeingShown + " " + bucketList_YorN);
+    boolean nameEqual = e.name.equals(eventInfo[0]);
+    boolean difficultyEqual = e.difficulty == int(eventInfo[1]);
+    boolean yearEqual = e.firstYear == int(eventInfo[2]);
+    boolean monthEqual = e.firstMonth == int(eventInfo[3]);
+    boolean dayEqual = e.firstDay == int(eventInfo[4]);
+    boolean bucketEqual = e.bucketList_YorN == boolean(eventInfo[5]);
+    
+    if(nameEqual && difficultyEqual && yearEqual && monthEqual && dayEqual && bucketEqual){
+      bucketEqual = !bucketEqual;
+      
+      if(bucketEqual)      
+        newEventsTXTFile.add(eventInfo[0] + " " + eventInfo[1] + " " + eventInfo[2] + " " + eventInfo[3] + " " + eventInfo[4] + " " + "false");
+
+      else
+        newEventsTXTFile.add(eventInfo[0] + " " + eventInfo[1] + " " + eventInfo[2] + " " + eventInfo[3] + " " + eventInfo[4] + " " + "true");
+    }
+    
+    else
+      newEventsTXTFile.add(eventsMemory[i]);
+  }
+  
+  eventsTxt = createWriter("events.txt");
+  
+  for(int i = 0; i < newEventsTXTFile.size(); i ++)
+    eventsTxt.println(newEventsTXTFile.get(i));
+  eventsTxt.flush();
+}
