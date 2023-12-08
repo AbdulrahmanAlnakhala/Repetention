@@ -1,17 +1,16 @@
 import g4p_controls.*;
-
+// Images and image information
 PImage rightArrow, leftArrow, checkmark, xMark, emptyBucket, fullBucket;
 int imageSize = 50;
 int textHeight = 100;
-
+// Spacing for everything 
 float daySizeX, daySizeY;
 float paddingX = 50;
 float paddingY = 100;
 int calDownShift = 80; //This pushes all of the calendar to be underneath the weekends/days texts
 
 int days = 7;
-//int weeks = 6;
-int month = month();
+int month = month();          // Makes month and year the current date
 int year = year();            //For max efficiency, you can see up to 3 years in the future.
 int startingYear = year;
 int yearAmt = 10;           //This is why you can see three years into the future! Change if you want
@@ -28,7 +27,7 @@ color circleCol = color(0, 129, 201);
 color BucketListCircleCol = color(164,174,191);
 color todayCol = color (200, 0, 50);
 int circleSize = 20;
- 
+ // Difficulties for tasks and how many days they are repeated across
 int[] easyDifficulty = {2,5,9,14};
 int[] mediumDifficulty = {2,4,6,9,11,14};
 int[] hardDifficulty = {2,4,6,8,10,14,16,20,24};

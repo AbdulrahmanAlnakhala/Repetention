@@ -1,19 +1,19 @@
-void drawDayScreen(int month, int day) {  
+void drawDayScreen(int month, int day) {  // The screen to add events and whatnot
   int padding = 70;
-  
+  // Assosiates a day for the current screen chosen
   Day currentDay = Days[year-startingYear][month-1][dayBeingShown - 1];
-  
+  // Draws the screen
   textSize(40);
   fill(255);
   rectMode(CORNERS);  
-  
+  // Adds month in dayscreen 
   textAlign(LEFT);
   text(nameOfMonth(month) + " " + day, 100,93);
   textAlign(CENTER);
-  
+  // Draws the event rectangle
   rect(0+padding, 120, width-padding, height-padding);
   rect(0+padding, 470, width-padding, height-padding);
-  
+  // Other accessory items in the day screen
   textSize(23);
   text("Finished!", 780, 92);
   checkmark = loadImage("green check.png");
@@ -21,7 +21,7 @@ void drawDayScreen(int month, int day) {
   emptyBucket = loadImage("empty bucket icon.png");
   fullBucket = loadImage("full bucket icon.png");
   image(checkmark, 843, 65, 40, 40);
-  
+  // Makes the gui items visible
   button1.setVisible(true);
   custom_slider1.setVisible(true);
   textfield1.setVisible(true);  
@@ -31,7 +31,7 @@ void drawDayScreen(int month, int day) {
   fill(0,0,255);
   text("Difficulty/Priority", 660, 486);
   fill(255);
-  
+  // Everything responsible for adding events and event related things that are in dayscreen
   for (int i=0; i < currentDay.events.size(); i++) {
     fill(0);
     textSize(20);
@@ -47,7 +47,7 @@ void drawDayScreen(int month, int day) {
       image(fullBucket, 727, 145+35*i, 25, 25);
     fill(255);
   }
-  
+  // The stuff that happens once the "Finished!" button is clicked
   if (mousePressed == true) {
     
     //If clicked the "finished!" button

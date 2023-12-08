@@ -13,20 +13,22 @@
  * Do not rename this tab!
  * =========================================================
  */
-
+// Textfield to add the name of the event
 public void textfield1_change1(GTextField source, GEvent event) { //CODE:textfield1:905434:
 
 } //CODE:textfield1:905434:
-
+// Slider to change the difficulty of an event
 public void custom_slider1_change1(GCustomSlider source, GEvent event) { //CODE:custom_slider1:398991:
 
 } //CODE:custom_slider1:398991:
-public int StartOfNewMonth, AddedIncriments;
+// The button to add the events onto the calender
+public int StartOfNewMonth, AddedIncriments; // Variables that needed to be public to be used by all functions
 public void button1_click1(GButton source, GEvent event) { //CODE:button1:825285:
+  // Adds events onto the calender and repeats them across several days
   String eventName = textfield1.getText(); //get text in textfield1    
     
   boolean NewMonth = false;
-  
+  // Does not count if a day is blank 
   if(eventName != ""){
     int CurrentMonth = month;
     int CurrentYear = year;
@@ -35,7 +37,7 @@ public void button1_click1(GButton source, GEvent event) { //CODE:button1:825285
     addEventToTXT(newEvent);
     
     Days[year-startingYear][month-1][dayBeingShown - 1].events.add(newEvent); //add event to the particular day
-    for (int n = 0; n < lengthOfMonth(year, CurrentMonth); n++){
+    for (int n = 0; n < lengthOfMonth(year, CurrentMonth); n++){ // The math for repeating events across days
       try{
         if (isValueInArray(n+1, difficulties[custom_slider1.getValueI() - 1])){
           if (dayBeingShown - 1 + n < lengthOfMonth(CurrentYear, CurrentMonth)){

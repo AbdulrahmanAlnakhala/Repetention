@@ -1,4 +1,4 @@
-// Calendar Algorithm 
+// Calendar Algorithm that calculates where all the days are placed in the calender
 int weekMonthStarter(int year, int month) {
   int daysSincestartingYear = 0;
   boolean leapYear; 
@@ -91,7 +91,7 @@ void setupCalendar() { //This adds the proper days to all days
     }
   }
 }
-
+// The amount of weeks that need to be drawn in the calender depending on the amount of days and where the last & first days are
 int amtOfWeeks(int y, int m) {
   if (weekMonthStarter(y, m) + lengthOfMonth(y, m) > 35)
     return 6;
@@ -102,8 +102,9 @@ int amtOfWeeks(int y, int m) {
   else
     return 4;
 }
-
+// Draws the Calender that is shown at the beggining of the program
 void drawCalendar() {    
+  // Makes GUI elements disappear 
   button1.setVisible(false);
   custom_slider1.setVisible(false);
   textfield1.setVisible(false);
@@ -112,14 +113,14 @@ void drawCalendar() {
   textSize(18);
   fill(0, 129, 201);
   text(topScreenText, width/2.0, 30);
-  
   textSize(60);
   fill(255);
+  // Says what the current month is
   text(nameOfMonth(month) + " " + year, width/2.0, textHeight+10);
-  
+  // Adds arrow to go forwards in months
   rightArrow = loadImage("right-arrow-for-next-month.png");
   image(rightArrow, width - paddingX - imageSize, textHeight-imageSize/2.0 - 10, imageSize, imageSize);
-  
+  // Adds arrow to go backwards in mmonths
   leftArrow = loadImage("left-arrow-for-previous-month.png");
   image(leftArrow, paddingX, textHeight - imageSize/2.0 - 10, imageSize, imageSize);        
   
@@ -156,7 +157,7 @@ void drawCalendar() {
   }
 }
 
-
+// A function to check whether a value is located within an array or not
 boolean isValueInArray(int value, int[] array) {
     for (int i = 0; i < array.length; i++) {
         if (array[i] == value) {
@@ -166,23 +167,24 @@ boolean isValueInArray(int value, int[] array) {
     return false;
 }
 
-
+// Fuction to remove and event
 void removeEvent(String eventName, Day day){
   for(int i = 0; i < day.events.size(); i++){
     if(day.events.get(i).name == eventName)
       day.events.remove(i);
   }
 }
-
+// Adds random affirmations to the top of the screen when used
 void randomizeAffirmation(){
   topScreenText = affirmations[floor(random(0, affirmations.length))];
 }
-
+// Checks if there is a textfile located within files and if not, it creates a textfile
 void addTXTEvents(){
   String[] eventsMemory = loadStrings("events.txt");
   if (eventsMemory == null){
     createWriter("events.txt");
   }
+  // Makes all the events that are saved on the textfile and adds them to the calender
   else {
     for (int i = 0 ; i < eventsMemory.length; i++) {
       String[] eventInfo = split(eventsMemory[i], " "); //(eventName + " " + custom_slider1.getValueI() + " " + year + " " + month + " " + dayBeingShown);
@@ -198,7 +200,7 @@ void addTXTEvents(){
       int pseudoEventMonth = int(eventInfo[3]);
       
       boolean NewMonth = false;
-              
+     
       if(0 <= eventYear - startingYear && eventYear - startingYear < yearAmt){
         Event newEvent = new Event(eventName, eventDifficulty, eventYear, eventMonth, eventDay, eventBucket); //create new event
         
@@ -235,7 +237,7 @@ void addTXTEvents(){
     }
   }
 }
-
+// Removes events that were previously added onto a textfile, in accordance with the user's changes
 void removeEventFromTXT(Event e){
   String[] eventsMemory = loadStrings("events.txt");
   ArrayList<String> newEventsTXTFile = new ArrayList<String>();
@@ -263,7 +265,7 @@ void removeEventFromTXT(Event e){
 }
 
 
-
+// Adds events that were previously added onto a textfile, in accordance with the user's changes
 void addEventToTXT(Event e){
   String[] eventsMemory = loadStrings("events.txt");
   ArrayList<String> newEventsTXTFile = new ArrayList<String>();
@@ -281,7 +283,7 @@ void addEventToTXT(Event e){
 }
 
 
-
+//Changes the event from a normal event to a bucketlist event in the textfile and saves it as so, in accordance to the user's changes
 void changeBucketBoolean(Event e){
     String[] eventsMemory = loadStrings("events.txt");
   ArrayList<String> newEventsTXTFile = new ArrayList<String>();
