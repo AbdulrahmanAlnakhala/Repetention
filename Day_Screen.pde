@@ -1,5 +1,6 @@
 void drawDayScreen(int month, int day) {  // The screen to add events and whatnot
   int padding = 70;
+  
   // Assosiates a day for the current screen chosen
   Day currentDay = Days[year-startingYear][month-1][dayBeingShown - 1];
   // Draws the screen
@@ -21,15 +22,24 @@ void drawDayScreen(int month, int day) {  // The screen to add events and whatno
   emptyBucket = loadImage("empty bucket icon.png");
   fullBucket = loadImage("full bucket icon.png");
   image(checkmark, 843, 65, 40, 40);
-  // Makes the gui items visible
-  button1.setVisible(true);
-  custom_slider1.setVisible(true);
-  textfield1.setVisible(true);  
+  // Makes the gui items visible or invisible if the events are over maxNumEvents
+   if (Days[year-startingYear][month - 1][dayBeingShown - 1 ].events.size() < maxNumEvents){
+     button1.setVisible(true);
+     custom_slider1.setVisible(true);
+     textfield1.setVisible(true);  
+   }
+   else if (Days[year-startingYear][month - 1][dayBeingShown - 1].events.size() == maxNumEvents){
+     button1.setVisible(false);
+     custom_slider1.setVisible(false);
+     textfield1.setVisible(false);  
+   }
   
   //Difficulty/priority text
   textSize(14);
   fill(0,0,255);
-  text("Difficulty/Priority", 660, 486);
+  if (Days[year-startingYear][month - 1][dayBeingShown - 1 ].events.size() < maxNumEvents){
+    text("Difficulty/Priority", 660, 486);
+  }
   fill(255);
   // Everything responsible for adding events and event related things that are in dayscreen
   for (int i=0; i < currentDay.events.size(); i++) {
@@ -124,5 +134,7 @@ void drawDayScreen(int month, int day) {  // The screen to add events and whatno
       }
     }
   }
-  rect(93,480, 570,520); //border around text field
+   if (Days[year-startingYear][month - 1][dayBeingShown - 1 ].events.size() < maxNumEvents){
+     rect(93,480, 570,520); //border around text field
+  }
 }

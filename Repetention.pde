@@ -41,6 +41,7 @@ int startingYear = year;
 int yearAmt = 10;           //This is why you can see three years into the future! Change if you want
 int dayBeingShown = 1;
 int dayConstant= calcDayConstant();
+int maxNumEvents = 9;
 
 void setup() {
   size(1000, 600);
