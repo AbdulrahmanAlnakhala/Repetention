@@ -9,13 +9,6 @@ float paddingX = 50;
 float paddingY = 100;
 int calDownShift = 80; //This pushes all of the calendar to be underneath the weekends/days texts
 
-int days = 7;
-int month = month();          // Makes month and year the current date
-int year = year();            //For max efficiency, you can see up to 3 years in the future.
-int startingYear = year;
-int yearAmt = 10;           //This is why you can see three years into the future! Change if you want
-int dayBeingShown = 1;
-
 boolean DrawDayScreen = false;
 boolean DrawOnce = true;
 
@@ -40,6 +33,14 @@ String topScreenText = "Repetention 1.0: The Calendar You'll Never Forget.";
 Day[][][] Days;
 
 PrintWriter eventsTxt;
+
+int days = 7;
+int month = month();          // Makes month and year the current date
+int year = year();            //For max efficiency, you can see up to 3 years in the future.
+int startingYear = year;
+int yearAmt = 10;           //This is why you can see three years into the future! Change if you want
+int dayBeingShown = 1;
+int dayConstant= calcDayConstant();
 
 void setup() {
   size(1000, 600);

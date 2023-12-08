@@ -1,27 +1,27 @@
 // Calendar Algorithm that calculates where all the days are placed in the calender
-int weekMonthStarter(int year, int month) {
-  int daysSincestartingYear = 0;
+int weekMonthStarter(int year, int month) { //Finds what day of the week a month in a year starts on
+  int daysSinceStartingYear = 0;
   boolean leapYear; 
 
-  for (int i = 0; i < year; i++) {
+  for (int i = startingYear; i < year; i++) {
     leapYear = (i % 4 == 0) && !(i % 100 == 0);
 
     if (leapYear)
-      daysSincestartingYear += 2; // If a leap year    
+      daysSinceStartingYear += 2; // If a leap year    
     
     else
-      daysSincestartingYear += 1;    
+      daysSinceStartingYear += 1;    
   }
 
   for(int i = 0; i < 12; i++) {
     if(month > i + 1)
-      daysSincestartingYear += monthLengths[i];
+      daysSinceStartingYear += monthLengths[i];
   }
 
   if ((year % 4 == 0) && !(year % 100 == 0) && (month > 2))
-    daysSincestartingYear += 1;
+    daysSinceStartingYear += 1;
 
-  int dayOfTheWeek = ((daysSincestartingYear + 5) % 7);
+  int dayOfTheWeek = ((daysSinceStartingYear + dayConstant) % 7); //This constant is found via a function near the bottom, it saves computing power :)
 
   return dayOfTheWeek;
 }
@@ -316,4 +316,31 @@ void changeBucketBoolean(Event e){
   for(int i = 0; i < newEventsTXTFile.size(); i ++)
     eventsTxt.println(newEventsTXTFile.get(i));
   eventsTxt.flush();
+}
+
+int calcDayConstant(){ //This just calculates the day constant that will be added in the original weekMonthStarter function
+  int daysSinceStartingYear = 0;
+  boolean leapYear; 
+
+  for (int i = 0; i < startingYear; i++) {
+    leapYear = (i % 4 == 0) && !(i % 100 == 0);
+
+    if (leapYear)
+      daysSinceStartingYear += 2; // If a leap year    
+    
+    else
+      daysSinceStartingYear += 1;    
+  }
+
+  for(int i = 0; i < 12; i++) {
+    if(month > i + 1)
+      daysSinceStartingYear += monthLengths[i];
+  }
+
+  if ((year % 4 == 0) && !(year % 100 == 0) && (month > 2))
+    daysSinceStartingYear += 1;
+
+  int dayOfTheWeek = (daysSinceStartingYear % 7);
+
+  return dayOfTheWeek;
 }

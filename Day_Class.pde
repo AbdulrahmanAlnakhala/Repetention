@@ -75,10 +75,10 @@ class Day {
     boolean bucketDot = false;
     
     for(int i = 0; i < this.events.size(); i++){
-      if(!this.events.get(i).bucketList_YorN && !bucketDot)          
+      if(this.events.get(i).bucketList_YorN && !bucketDot)          
         bucketDot = true;
       
-      else if(this.events.get(i).bucketList_YorN && !taskDot)        
+      else if(!this.events.get(i).bucketList_YorN && !taskDot)        
         taskDot = true;      
       
       if(taskDot && bucketDot)
