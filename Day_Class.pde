@@ -93,7 +93,7 @@ class Day {
       circle(this.x + this.SizeX/3.0, this.y + this.SizeY/2.0, circleSize);              
       stroke(1);      
     }
-    // Dras it in the middle if it is only a normal task
+    // Draws it in the middle if it is only a normal task
     else if(taskDot){
       fill(circleCol);
       noStroke();

@@ -43,7 +43,7 @@ int lengthOfMonth(int year, int month) {
 String nameOfMonth(int month) {    
   return months[month - 1];
 }
-
+// Does the math for flipping through months, forwards and backwards, if the arrows are clicked
 void mousePressed() {
   boolean firstJan = (year == startingYear) && (month == 1);
   boolean lastDay = (year == startingYear + yearAmt - 1) && (month == 12); //Prevents calendar from going out of bounds
