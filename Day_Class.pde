@@ -91,14 +91,16 @@ class Day {
       circle(this.x + this.SizeX/1.5, this.y + this.SizeY/2.0, circleSize);      
       fill(BucketListCircleCol);
       circle(this.x + this.SizeX/3.0, this.y + this.SizeY/2.0, circleSize);              
-      stroke(1);      
+      stroke(1);    
+      fill(0);
     }
     // Draws it in the middle if it is only a normal task
     else if(taskDot){
       fill(circleCol);
       noStroke();
       circle(this.x + this.SizeX/2.0, this.y + this.SizeY/2.0, circleSize);
-      stroke(1);      
+      stroke(1);     
+      fill(0);
     }
     // Draws it in the middle if it is only a bucketlist task
     else if(bucketDot){
@@ -106,6 +108,7 @@ class Day {
       noStroke();
       circle(this.x + this.SizeX/2.0, this.y + this.SizeY/2.0, circleSize);
       stroke(1);
+      fill(0);
     }
   }
 }
