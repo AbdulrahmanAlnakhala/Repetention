@@ -63,7 +63,7 @@ void drawDayScreen(int month, int day) {  // The screen to add events and whatno
     //If clicked the "finished!" button
     if(mouseX >= 840 && mouseX <= 885) {
       if (mouseY >= 65 && mouseY <= 105) {
-        DrawDayScreen = false;
+        drawDayScreen = false;
         textfield1.setVisible(false);
         custom_slider1.setVisible(false);
         DrawOnce = true;
@@ -77,7 +77,7 @@ void drawDayScreen(int month, int day) {  // The screen to add events and whatno
         if (mouseY >=140+35*i && mouseY <= 164+35*i) {          
                     
           String eventName = currentDay.events.get(i).name;     
-          boolean NewMonth = false;
+          boolean newMonth = false;
           
           int pseudoYear = currentDay.events.get(i).firstYear;
           int pseudoMonth = currentDay.events.get(i).firstMonth;
@@ -94,10 +94,10 @@ void drawDayScreen(int month, int day) {  // The screen to add events and whatno
                 removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][pseudoDay - 1 + n]);
               }
               
-              else if ((pseudoDay - 1) + (n+1)> lengthOfMonth(pseudoYear, pseudoMonth) && NewMonth == false){ 
-                NewMonth = true;
+              else if ((pseudoDay - 1) + (n+1)> lengthOfMonth(pseudoYear, pseudoMonth) && newMonth == false){ 
+                newMonth = true;
                 
-                StartOfNewMonth = ((pseudoDay - 1) + (n+1)) - lengthOfMonth(pseudoYear, pseudoMonth) - 1;
+                startOfnewMonth = ((pseudoDay - 1) + (n+1)) - lengthOfMonth(pseudoYear, pseudoMonth) - 1;
                 pseudoMonth = pseudoMonth + 1;                
                 
                 if (pseudoMonth == 13){ // small issue but ill ask Teja how to deal with it
@@ -105,14 +105,14 @@ void drawDayScreen(int month, int day) {  // The screen to add events and whatno
                   pseudoYear += 1; 
                 }                               
                                 
-                removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][StartOfNewMonth]);
-                AddedIncriments = n - StartOfNewMonth;
+                removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][startOfnewMonth]);
+                addedIncriments = n - startOfnewMonth;
               }
 
               
-              else if (NewMonth == true){                
-                AddedIncriments = n - StartOfNewMonth - (lengthOfMonth(pseudoYear, pseudoMonth) - pseudoDay);
-                removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][StartOfNewMonth + AddedIncriments - 1]);                            
+              else if (newMonth == true){                
+                addedIncriments = n - startOfnewMonth - (lengthOfMonth(pseudoYear, pseudoMonth) - pseudoDay);
+                removeEvent(eventName, Days[pseudoYear-startingYear][pseudoMonth - 1][startOfnewMonth + addedIncriments - 1]);                            
               }              
             }            
           }          

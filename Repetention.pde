@@ -4,12 +4,12 @@ PImage rightArrow, leftArrow, checkmark, xMark, emptyBucket, fullBucket;
 int imageSize = 50;
 int textHeight = 100;
 // Spacing for everything 
-float daySizeX, daySizeY;
+float daysizeX, daysizeY;
 float paddingX = 50;
 float paddingY = 100;
 int calDownShift = 80; //This pushes all of the calendar to be underneath the weekends/days texts
 
-boolean DrawDayScreen = false;
+boolean drawDayScreen = false;
 boolean DrawOnce = true;
 
 String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
@@ -17,7 +17,7 @@ int[] monthLengths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 String[] daysOfWeek = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
 color circleCol = color(0, 129, 201);
-color BucketListCircleCol = color(164,174,191);
+color bucketListCircleCol = color(164,174,191);
 color todayCol = color (200, 0, 50);
 int circleSize = 20;
  // Difficulties for tasks and how many days they are repeated across
@@ -55,7 +55,7 @@ void setup() {
 
 void draw() {
   background(204);
-  if (!DrawDayScreen)
+  if (!drawDayScreen)
     drawCalendar();
     
   else  

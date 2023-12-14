@@ -48,7 +48,7 @@ void mousePressed() {
   boolean firstJan = (year == startingYear) && (month == 1);
   boolean lastDay = (year == startingYear + yearAmt - 1) && (month == 12); //Prevents calendar from going out of bounds
   
-  if ((dist(mouseX, mouseY, width - paddingX - imageSize/2.0, textHeight - imageSize/2.0) <= imageSize/2.0) && (DrawDayScreen == false) && !lastDay) {    
+  if ((dist(mouseX, mouseY, width - paddingX - imageSize/2.0, textHeight - imageSize/2.0) <= imageSize/2.0) && (drawDayScreen == false) && !lastDay) {    
     month += 1;    
     if(month == 13) {
       month = 1;
@@ -56,7 +56,7 @@ void mousePressed() {
     }      
   } 
   
-  else if ((dist(mouseX, mouseY, paddingX + imageSize/2.0, textHeight - imageSize/2.0) <= imageSize/2.0) && (DrawDayScreen == false) && !firstJan) {       
+  else if ((dist(mouseX, mouseY, paddingX + imageSize/2.0, textHeight - imageSize/2.0) <= imageSize/2.0) && (drawDayScreen == false) && !firstJan) {       
     month -= 1;
     if(month == 0) {
       month = 12;
@@ -70,8 +70,8 @@ void setupCalendar() { //This adds the proper days to all days
     for(int j = 1; j <= 12; j++) {                                   //Goes through all months
       int weeks = amtOfWeeks(i, j);    
       
-      daySizeX = (width-2*paddingX)/days;
-      daySizeY = (height-2*paddingY)/weeks;
+      daysizeX = (width-2*paddingX)/days;
+      daysizeY = (height-2*paddingY)/weeks;
     
       int topLeftText = 1; //Number in the top left of each box when making calendar      
       int dayStarter = weekMonthStarter(i, j);      
@@ -81,12 +81,12 @@ void setupCalendar() { //This adds the proper days to all days
         float x = paddingX;      
         for (int d = 0; d < days; d++) {                
           if((lengthOfMonth(year, month) >= topLeftText - dayStarter) && (topLeftText - dayStarter > 0))
-            Days[i - startingYear][j - 1][7*w + d - dayStarter] = new Day(x, y + calDownShift, daySizeX, daySizeY, topLeftText - dayStarter);                         
+            Days[i - startingYear][j - 1][7*w + d - dayStarter] = new Day(x, y + calDownShift, daysizeX, daysizeY, topLeftText - dayStarter);                         
           
           topLeftText += 1;
-          x += daySizeX;                
+          x += daysizeX;                
         }      
-        y += daySizeY;
+        y += daysizeY;
       }
     }
   }
@@ -129,14 +129,14 @@ void drawCalendar() {
   fill(0);
   
   int weekAmt = amtOfWeeks(year, month);
-  daySizeX = (width-2*paddingX)/days;
-  daySizeY = (height-2*paddingY)/weekAmt;
+  daysizeX = (width-2*paddingX)/days;
+  daysizeY = (height-2*paddingY)/weekAmt;
   
   //Draws white squares before first day of month
   for(int i = 0; i < weekMonthStarter(year, month); i++) {
     fill(255);
     rectMode(CORNERS);      
-    rect(paddingX + i*daySizeX, paddingY + calDownShift, paddingX + (i + 1)*daySizeX, paddingY + daySizeY + calDownShift);
+    rect(paddingX + i*daysizeX, paddingY + calDownShift, paddingX + (i + 1)*daysizeX, paddingY + daysizeY + calDownShift);
   }
   
   //Draws white squares after first day of month
@@ -144,7 +144,7 @@ void drawCalendar() {
     int xPos = i % 7;
     fill(255);
     rectMode(CORNERS);      
-    rect(paddingX + xPos*daySizeX, paddingY + (weekAmt - 1)*daySizeY + calDownShift, paddingX + (xPos + 1)*daySizeX, paddingY + weekAmt*daySizeY + calDownShift);
+    rect(paddingX + xPos*daysizeX, paddingY + (weekAmt - 1)*daysizeY + calDownShift, paddingX + (xPos + 1)*daysizeX, paddingY + weekAmt*daysizeY + calDownShift);
   }
   
   //Draws calendar days
@@ -153,7 +153,7 @@ void drawCalendar() {
 
   for (int i=0; i < 7; i++) {
     textSize(18);
-    text(daysOfWeek[i], paddingX + daySizeX * (i + 0.5), 165);
+    text(daysOfWeek[i], paddingX + daysizeX * (i + 0.5), 165);
   }
 }
 
@@ -199,7 +199,7 @@ void addTXTEvents(){
       int pseudoEventYear = int(eventInfo[2]);
       int pseudoEventMonth = int(eventInfo[3]);
       
-      boolean NewMonth = false;
+      boolean newMonth = false;
      
       if(0 <= eventYear - startingYear && eventYear - startingYear < yearAmt){
         Event newEvent = new Event(eventName, eventDifficulty, eventYear, eventMonth, eventDay, eventBucket); //create new event
@@ -213,21 +213,21 @@ void addTXTEvents(){
                 Days[eventYear - startingYear][eventMonth - 1][eventDay - 1 + n].events.add(newEvent);
               }
               
-              else if ((eventDay - 1) + (n+1)> lengthOfMonth(pseudoEventYear, pseudoEventMonth) && NewMonth == false){ 
-                NewMonth = true;
-                StartOfNewMonth = ((eventDay - 1) + (n+1)) - lengthOfMonth(pseudoEventYear, pseudoEventMonth) - 1;
+              else if ((eventDay - 1) + (n+1)> lengthOfMonth(pseudoEventYear, pseudoEventMonth) && newMonth == false){ 
+                newMonth = true;
+                startOfnewMonth = ((eventDay - 1) + (n+1)) - lengthOfMonth(pseudoEventYear, pseudoEventMonth) - 1;
                 pseudoEventMonth = pseudoEventMonth + 1;
                 if (pseudoEventMonth == 13){
                   pseudoEventMonth = 1;
                   pseudoEventYear += 1;  
                 }
-                Days[pseudoEventYear-startingYear][pseudoEventMonth - 1][StartOfNewMonth].events.add(newEvent);
-                AddedIncriments = n - StartOfNewMonth;
+                Days[pseudoEventYear-startingYear][pseudoEventMonth - 1][startOfnewMonth].events.add(newEvent);
+                addedIncriments = n - startOfnewMonth;
               }
               
-              else if (NewMonth == true){
-                AddedIncriments = n - StartOfNewMonth - (lengthOfMonth(pseudoEventYear, pseudoEventMonth)- newEvent.firstDay);
-                Days[pseudoEventYear-startingYear][pseudoEventMonth - 1][StartOfNewMonth + AddedIncriments - 1].events.add(newEvent);
+              else if (newMonth == true){
+                addedIncriments = n - startOfnewMonth - (lengthOfMonth(pseudoEventYear, pseudoEventMonth)- newEvent.firstDay);
+                Days[pseudoEventYear-startingYear][pseudoEventMonth - 1][startOfnewMonth + addedIncriments - 1].events.add(newEvent);
               }
             }
           }

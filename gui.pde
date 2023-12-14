@@ -22,12 +22,12 @@ public void custom_slider1_change1(GCustomSlider source, GEvent event) { //CODE:
 
 } //CODE:custom_slider1:398991:
 // The button to add the events onto the calender
-public int StartOfNewMonth, AddedIncriments; // Variables that needed to be public to be used by all functions
+public int startOfnewMonth, addedIncriments; // Variables that needed to be public to be used by all functions
 public void button1_click1(GButton source, GEvent event) { //CODE:button1:825285:
   // Adds events onto the calender and repeats them across several days
   String eventName = textfield1.getText(); //get text in textfield1    
     
-  boolean NewMonth = false;
+  boolean newMonth = false;
   // Does not count if a day is blank 
   if(eventName != ""){
     int CurrentMonth = month;
@@ -43,20 +43,20 @@ public void button1_click1(GButton source, GEvent event) { //CODE:button1:825285
           if (dayBeingShown - 1 + n < lengthOfMonth(CurrentYear, CurrentMonth)){
             Days[year-startingYear][CurrentMonth - 1][dayBeingShown - 1 + n].events.add(newEvent);
           }
-          else if ((dayBeingShown - 1) + (n+1)> lengthOfMonth(CurrentYear, CurrentMonth) && NewMonth == false){ 
-            NewMonth = true;
-            StartOfNewMonth = ((dayBeingShown - 1) + (n+1)) - lengthOfMonth(CurrentYear, CurrentMonth) - 1;
+          else if ((dayBeingShown - 1) + (n+1)> lengthOfMonth(CurrentYear, CurrentMonth) && newMonth == false){ 
+            newMonth = true;
+            startOfnewMonth = ((dayBeingShown - 1) + (n+1)) - lengthOfMonth(CurrentYear, CurrentMonth) - 1;
             CurrentMonth = CurrentMonth + 1;
             if (CurrentMonth == 13){
               CurrentMonth = 1;
               CurrentYear += 1;  
             }
-            Days[CurrentYear-startingYear][CurrentMonth - 1][StartOfNewMonth].events.add(newEvent);
-            AddedIncriments = n - StartOfNewMonth;
+            Days[CurrentYear-startingYear][CurrentMonth - 1][startOfnewMonth].events.add(newEvent);
+            addedIncriments = n - startOfnewMonth;
           }
-          else if (NewMonth == true){
-            AddedIncriments = n - StartOfNewMonth - (lengthOfMonth(CurrentYear, CurrentMonth)- newEvent.firstDay);
-            Days[CurrentYear-startingYear][CurrentMonth - 1][StartOfNewMonth + AddedIncriments - 1].events.add(newEvent);
+          else if (newMonth == true){
+            addedIncriments = n - startOfnewMonth - (lengthOfMonth(CurrentYear, CurrentMonth)- newEvent.firstDay);
+            Days[CurrentYear-startingYear][CurrentMonth - 1][startOfnewMonth + addedIncriments - 1].events.add(newEvent);
           }
         }
       }

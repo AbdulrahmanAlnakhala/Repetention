@@ -1,39 +1,39 @@
 class Day {
-  float x, y, SizeX, SizeY;
+  float x, y, sizeX, sizeY;
   int dayNum;
-  color Colour;
-  boolean SelectedOnce;
+  color colour;
+  boolean selectedOnce;
   ArrayList<Event> events = new ArrayList<Event>();
   
-  Day(float x, float y, float SizeX, float SizeY, int dayN) {
+  Day(float x, float y, float sizeX, float sizeY, int dayN) {
     this.x = x;
     this.y = y;
-    this.SizeX = SizeX;
-    this.SizeY = SizeY;
-    this.Colour = color(255);
+    this.sizeX = sizeX;
+    this.sizeY = sizeY;
+    this.colour = color(255);
     this.dayNum = dayN;
   }
   
   void mouseClicked() { 
-    if (mouseX >= this.x && mouseX <= this.x + this.SizeX && mouseY >= this.y && mouseY <= this.y + this.SizeY) {
-      this.Colour = color(255, 0, 0);     
+    if (mouseX >= this.x && mouseX <= this.x + this.sizeX && mouseY >= this.y && mouseY <= this.y + this.sizeY) {
+      this.colour = color(255, 0, 0);     
     }
   }
   
   void DrawMe() {    
     //Detects if a day is clicked and opens the corresponding Day Screen to add, change, and look at events 
-    if (DrawDayScreen == false) {
+    if (drawDayScreen == false) {
       if (mousePressed == true) {         
         for (int i = 0; i < lengthOfMonth(year, month); i++) {
-          if (mouseX >= Days[year - startingYear][month - 1][i].x && mouseX <= Days[year - startingYear][month - 1][i].x + Days[year - startingYear][month - 1][i].SizeX ) {
-            if (mouseY + calDownShift >= Days[year - startingYear][month - 1][i].y + Days[year - startingYear][month - 1][i].SizeY && mouseY + calDownShift <= Days[year - startingYear][month - 1][i].y + Days[year - startingYear][month - 1][i].SizeY*2) {                
-              if (SelectedOnce == false && (Days[year - startingYear][month - 1][i].dayNum != 0)) {
-                DrawDayScreen = true;                                    
+          if (mouseX >= Days[year - startingYear][month - 1][i].x && mouseX <= Days[year - startingYear][month - 1][i].x + Days[year - startingYear][month - 1][i].sizeX ) {
+            if (mouseY + calDownShift >= Days[year - startingYear][month - 1][i].y + Days[year - startingYear][month - 1][i].sizeY && mouseY + calDownShift <= Days[year - startingYear][month - 1][i].y + Days[year - startingYear][month - 1][i].sizeY*2) {                
+              if (selectedOnce == false && (Days[year - startingYear][month - 1][i].dayNum != 0)) {
+                drawDayScreen = true;                                    
                 dayBeingShown = Days[year - startingYear][month - 1][i].dayNum;                
               }
               
-              else if (SelectedOnce == true) {
-                Days[year - startingYear][month - 1][i].Colour = color(255);
+              else if (selectedOnce == true) {
+                Days[year - startingYear][month - 1][i].colour = color(255);
               }
             }
           }
@@ -43,11 +43,11 @@ class Day {
     
     else
     // Makes the days white
-      this.Colour = color(255);
+      this.colour = color(255);
     //Draws the individual days in the opening calender
-    fill(this.Colour);
+    fill(this.colour);
     rectMode(CORNERS);    
-    rect(this.x, this.y, this.x+this.SizeX, this.y + this.SizeY);    
+    rect(this.x, this.y, this.x+this.sizeX, this.y + this.sizeY);    
     
     // Draws a dot around the number of the current day
     fill(0);
@@ -88,9 +88,9 @@ class Day {
     if(taskDot && bucketDot){
       noStroke();
       fill(circleCol);
-      circle(this.x + this.SizeX/1.5, this.y + this.SizeY/2.0, circleSize);      
-      fill(BucketListCircleCol);
-      circle(this.x + this.SizeX/3.0, this.y + this.SizeY/2.0, circleSize);              
+      circle(this.x + this.sizeX/1.5, this.y + this.sizeY/2.0, circleSize);      
+      fill(bucketListCircleCol);
+      circle(this.x + this.sizeX/3.0, this.y + this.sizeY/2.0, circleSize);              
       stroke(1);    
       fill(0);
     }
@@ -98,15 +98,15 @@ class Day {
     else if(taskDot){
       fill(circleCol);
       noStroke();
-      circle(this.x + this.SizeX/2.0, this.y + this.SizeY/2.0, circleSize);
+      circle(this.x + this.sizeX/2.0, this.y + this.sizeY/2.0, circleSize);
       stroke(1);     
       fill(0);
     }
     // Draws it in the middle if it is only a bucketlist task
     else if(bucketDot){
-      fill(BucketListCircleCol);
+      fill(bucketListCircleCol);
       noStroke();
-      circle(this.x + this.SizeX/2.0, this.y + this.SizeY/2.0, circleSize);
+      circle(this.x + this.sizeX/2.0, this.y + this.sizeY/2.0, circleSize);
       stroke(1);
       fill(0);
     }
